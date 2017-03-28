@@ -45,7 +45,7 @@ var path = {
   watch: {    //За изменениями каких файлов мы хотим наблюдать
     html: 'src/**/*.html',
     scripts: 'src/app/**/*.js',
-    styles: 'src/style/**/*.styl',
+    styles: 'src/content/styles/**/*.less',
     img: 'src/img/**/*.*',
     fonts: 'src/fonts/**/*.*'
   },
@@ -84,7 +84,9 @@ gulp.task('scripts', function() {
   gulp.src(path.src.scripts)
     .pipe(fileSort())
     .pipe(concat('index.js'))
+    .pipe(sourcemaps.init())
     .pipe(uglify())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.dist.dev.scripts))
     .pipe(reload({stream: true}));
 });

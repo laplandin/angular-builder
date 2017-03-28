@@ -1,0 +1,9 @@
+<div class="" layout="row" layout-align="center center">
+  <form class="modal-width" layout="column" layout-align="top center">
+    <input ng-model="task.name" class="create-modal__name" type="text" name="name" placeholder="task name">
+    <textarea ng-model="task.description" class="create-modal__description" name="name" rows="8" placeholder="task description"></textarea>
+    <input ng-model="task.date" class="create-modal__date" type="date" name="date">
+    <!-- <input type="submit" value="create" ng-click="addTask(task) && closeThisDialog()"> -->
+    <input type="submit" value="create" ng-click="addTask()">
+  </form>
+</div>

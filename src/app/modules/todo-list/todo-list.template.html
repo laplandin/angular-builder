@@ -1,3 +1,9 @@
-<div>
-  <h2 class="todo-list__title">Заголовок блока</h2>
+<div class="task-list">
+  <ul>
+    <li ng-repeat="task in $ctrl.tasks" ng-if="task.name">
+      <h2>{{task.name}}</h2>
+      <p>{{task.description}}</p>
+      <span>{{task.date}}</span>
+    </li>
+  </ul>
 </div>

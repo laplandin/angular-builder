@@ -1,5 +1,3 @@
 (function() {
-angular.module('todoList', [
-  'ngMaterial'
-]);
+  angular.module('todoList', []);
 }());
