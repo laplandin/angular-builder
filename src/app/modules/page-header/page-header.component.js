@@ -17,7 +17,7 @@
                     controller:['$scope', 'TaskManager', function($scope, TaskManager) {
                         $scope.task = {};
                         $scope.addTask = function(){
-                          TaskManager.setTask(this.task);
+                          TaskManager.addTask(this.task);
                           this.task = {};
                           ngDialog.close();
                         }
