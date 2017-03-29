@@ -1,19 +1,30 @@
-<div class="task-list">
-  <ul>
-    <li ng-repeat="task in $ctrl.tasks" ng-if="task.name">
-      <div ng-hide="$ctrl.edited === $index">
-        <h2>{{task.name}}</h2>
-        <p>{{task.description}}</p>
-        <span>{{task.date}}</span>
-        <button ng-click="$ctrl.deleteTask($index)">Delete</button>
-      </div>
-      <button ng-hide="$ctrl.edited === $index" ng-click="$ctrl.edited = $index; $ctrl.setBuferState($index)">Edit</button>
-      <button ng-show="$ctrl.edited === $index" ng-click="$ctrl.edited = null">Close</button>
-      <button ng-show="$ctrl.edited === $index" ng-click="$ctrl.edited = null; $ctrl.setEditedTask($index,$ctrl.editBufer)">Save</button>
-      <form ng-if="$ctrl.edited === $index">
-        <input type="text" ng-model="$ctrl.editBufer.name" value="{{task.name}}">
-        <textarea ng-model="$ctrl.editBufer.description" rows="8"></textarea>
-      </form>
-    </li>
-  </ul>
+<div class="task-list content-width" layout="column" layout-align="start stretch" >
+  Order by
+  <select ng-model="$ctrl.orderProp" flex="20" class="task-list__order-select">
+    <option value="name">name</option>
+    <option value="date">date</option>
+  </select>
+  <div ng-repeat="task in $ctrl.tasks | orderBy:$ctrl.orderProp" ng-class="{'task-list__task-item--edit': $ctrl.edited === $index}" ng-if="task.name && task.description" class="padded task-list__task-item" md-whiteframe="3" flex="100" layout="column" layout-align="start stretch">
+  <!-- <div ng-repeat="task in $ctrl.tasks | orderBy:$ctrl.orderProp" ng-class="{'task-list__task-item--edit': $ctrl.edited === $index}" ng-if="task.name && task.description" class="padded task-list__task-item" md-whiteframe="{{height}}" flex="100" layout="column" layout-align="start stretch"
+      ng-init="height = 3" ng-mouseenter="height = 6" ng-mouseleave="height = 3"> -->
+    <div ng-hide="$ctrl.edited === $index">
+      <h2>{{task.name}}</h2>
+      <p>{{task.description}}</p>
+      <p>{{task.date | date: 'dd.MM.yyyy'}}</p>
+    </div>
+    <form class="task-list__edit-form" ng-if="$ctrl.edited === $index" layout="column" layout-align="start start">
+      <p>Name</p>
+      <input class="task-list__edit-form-name" type="text" ng-model="$ctrl.editBufer.name">
+      <p>Description</p>
+      <textarea class="task-list__edit-form-description" ng-model="$ctrl.editBufer.description"></textarea>
+      <p>Date</p>
+      <input class="task-list__edit-form-date" ng-model="$ctrl.editBufer.date" type="date" flex="50">
+    </form>
+    <div class="page-header__btn-toolbar">
+      <md-button class="md-raised" ng-hide="$ctrl.edited === $index" ng-click="$ctrl.edited = $index; $ctrl.setBuferState($index)">Edit</md-button>
+      <md-button class="md-raised" ng-show="$ctrl.edited === $index" ng-click="$ctrl.edited = null">Close</md-button>
+      <md-button class="md-raised md-primary" ng-show="$ctrl.edited === $index" ng-click="$ctrl.edited = null; $ctrl.setEditedTask($index,$ctrl.editBufer)">Save</md-button>
+      <md-button ng-click="$ctrl.deleteTask($index); $ctrl.initState()" class="md-raised md-warn">Delete</md-button>
+    </div>
+  </div>
 </div>

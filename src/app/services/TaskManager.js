@@ -39,6 +39,9 @@
             tasks.splice(index,1);
             setToStorage(tasks);
           }
+          // initState: function() {
+          //
+          // }
         }
       }]
     );
