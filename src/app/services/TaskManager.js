@@ -9,7 +9,7 @@
         function getFromStorage() {
           var tasks =  localStorage.getItem('tasks');
           var arr = [];
-          if (tasks === undefined || tasks === 'undefined') return arr;
+          if (angular.isArray(tasks)) return arr;
           return JSON.parse(tasks);
         }
 
